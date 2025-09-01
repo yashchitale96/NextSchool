@@ -1,0 +1,31 @@
+{
+  "name": "nextschool",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "init-db": "node scripts/init-db.js"
+  },
+  "dependencies": {
+    "cloudinary": "^1.41.3",
+    "dotenv": "^17.2.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "mysql2": "^3.14.4",
+    "next": "15.5.2",
+    "next-connect": "^1.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "tailwindcss": "^4"
+  }
+}
