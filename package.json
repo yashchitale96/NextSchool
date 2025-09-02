@@ -12,6 +12,7 @@
     "deploy": "npm run init-production-db && npm run build"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4",
     "cloudinary": "^1.41.3",
     "dotenv": "^17.2.1",
     "multer": "^2.0.2",
@@ -21,11 +22,11 @@
     "next-connect": "^1.0.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "^7.62.0"
+    "react-hook-form": "^7.62.0",
+    "tailwindcss": "^4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4"
