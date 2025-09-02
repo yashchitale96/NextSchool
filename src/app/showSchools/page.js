@@ -15,16 +15,26 @@ export default function ShowSchools() {
 
   const fetchSchools = async () => {
     try {
-      const response = await fetch('/api/schools');
+      setLoading(true);
+      setError('');
+      
+      const response = await fetch('/api/schools', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
       const data = await response.json();
       
       if (response.ok) {
-        setSchools(data.schools);
+        setSchools(data.schools || []);
       } else {
         setError(data.error || 'Failed to fetch schools');
       }
     } catch (error) {
-      setError('Failed to fetch schools');
+      console.error('Fetch error:', error);
+      setError('Network error: Unable to connect to server');
     } finally {
       setLoading(false);
     }

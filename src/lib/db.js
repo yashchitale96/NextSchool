@@ -21,7 +21,9 @@ const pool = mysql.createPool(config);
 // Test connection on startup
 pool.getConnection()
   .then(connection => {
-    console.log('Database connected successfully');
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Database connected successfully');
+    }
     connection.release();
   })
   .catch(err => {

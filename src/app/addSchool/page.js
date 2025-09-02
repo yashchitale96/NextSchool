@@ -21,13 +21,18 @@ export default function AddSchool() {
     setSubmitMessage('');
 
     try {
+      // Client-side validation
+      if (!data.name?.trim()) {
+        throw new Error('School name is required');
+      }
+      
       const formData = new FormData();
-      formData.append('name', data.name);
-      formData.append('address', data.address);
-      formData.append('city', data.city);
-      formData.append('state', data.state);
-      formData.append('contact', data.contact);
-      formData.append('email_id', data.email_id);
+      formData.append('name', data.name.trim());
+      formData.append('address', data.address.trim());
+      formData.append('city', data.city.trim());
+      formData.append('state', data.state.trim());
+      formData.append('contact', data.contact.trim());
+      formData.append('email_id', data.email_id.trim());
       
       if (data.image && data.image[0]) {
         formData.append('image', data.image[0]);
@@ -41,16 +46,17 @@ export default function AddSchool() {
       const result = await response.json();
 
       if (response.ok) {
-        setSubmitMessage('School added successfully!');
+        setSubmitMessage('✅ School added successfully! Redirecting...');
         reset();
         setTimeout(() => {
           router.push('/showSchools');
-        }, 2000);
+        }, 1500);
       } else {
-        setSubmitMessage(`Error: ${result.error}`);
+        setSubmitMessage(`❌ Error: ${result.error}`);
       }
     } catch (error) {
-      setSubmitMessage('Error: Failed to add school');
+      console.error('Submit error:', error);
+      setSubmitMessage(`❌ Error: ${error.message || 'Failed to add school'}`);
     } finally {
       setIsSubmitting(false);
     }
