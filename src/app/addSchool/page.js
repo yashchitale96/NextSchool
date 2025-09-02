@@ -81,7 +81,7 @@ export default function AddSchool() {
                     message: 'School name must be at least 3 characters'
                   }
                 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                 placeholder="Enter school name"
               />
               {errors.name && (
@@ -104,7 +104,7 @@ export default function AddSchool() {
                     message: 'Address must be at least 10 characters'
                   }
                 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                 placeholder="Enter full address"
               />
               {errors.address && (
@@ -128,7 +128,7 @@ export default function AddSchool() {
                       message: 'City must be at least 2 characters'
                     }
                   })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   placeholder="Enter city"
                 />
                 {errors.city && (
@@ -150,7 +150,7 @@ export default function AddSchool() {
                       message: 'State must be at least 2 characters'
                     }
                   })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                   placeholder="Enter state"
                 />
                 {errors.state && (
@@ -174,7 +174,7 @@ export default function AddSchool() {
                     message: 'Contact number must be exactly 10 digits'
                   }
                 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                 placeholder="Enter 10-digit contact number"
               />
               {errors.contact && (
@@ -197,7 +197,7 @@ export default function AddSchool() {
                     message: 'Please enter a valid email address'
                   }
                 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                 placeholder="Enter email address"
               />
               {errors.email_id && (
