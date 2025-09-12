@@ -1,13 +1,15 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function AddSchool() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
   const router = useRouter();
+  const { isAuthenticated, isLoading, requireAuth, user } = useAuth();
 
   const {
     register,
@@ -15,6 +17,40 @@ export default function AddSchool() {
     formState: { errors },
     reset
   } = useForm();
+
+  // Check authentication on mount
+  useEffect(() => {
+    if (!isLoading) {
+      requireAuth();
+    }
+  }, [isLoading, requireAuth]);
+
+  // Show loading while checking auth
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show message if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 0h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <h3 className="mt-2 text-sm font-medium text-gray-900">Authentication Required</h3>
+          <p className="mt-1 text-sm text-gray-500">You need to be logged in to add schools.</p>
+        </div>
+      </div>
+    );
+  }
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -41,6 +77,7 @@ export default function AddSchool() {
       const response = await fetch('/api/schools', {
         method: 'POST',
         body: formData,
+        credentials: 'include', // Include cookies for authentication
       });
 
       const result = await response.json();
@@ -64,6 +101,24 @@ export default function AddSchool() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      {/* Header */}
+      <div className="max-w-2xl mx-auto mb-6">
+        <div className="flex justify-between items-center">
+          <button
+            onClick={() => router.push('/')}
+            className="text-blue-600 hover:text-blue-800 flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Home
+          </button>
+          <div className="text-sm text-gray-600">
+            Logged in as: <span className="font-medium text-green-600">{user?.email}</span>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-2xl mx-auto">
         <div className="bg-white shadow-lg rounded-lg p-6 sm:p-8">
           <div className="mb-8">

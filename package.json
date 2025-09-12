@@ -8,18 +8,22 @@
     "start": "next start",
     "lint": "eslint",
     "init-db": "node scripts/init-db.js",
+    "init-auth-db": "node scripts/init-auth-db.js",
     "init-production-db": "node scripts/init-production-db.js",
-    "deploy": "npm run init-production-db && npm run build"
+    "deploy": "npm run init-production-db && npm run init-auth-db && npm run build"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4",
+    "bcryptjs": "^3.0.2",
     "cloudinary": "^1.41.3",
     "dotenv": "^17.2.1",
+    "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",
     "mysql2": "^3.14.4",
     "next": "15.5.2",
     "next-connect": "^1.0.0",
+    "nodemailer": "^7.0.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",

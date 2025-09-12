@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '../../../lib/db';
 import { uploadToCloudinary } from '../../../lib/cloudinary';
+import { requireAuth } from '../../../lib/auth';
 
 export async function POST(request) {
   try {
+    // Check authentication first
+    const authResult = await requireAuth(request);
+    
+    if (!authResult.authenticated) {
+      return NextResponse.json(
+        { error: 'Authentication required. Please login to add schools.' },
+        { status: 401 }
+      );
+    }
     const formData = await request.formData();
     
     const name = formData.get('name');

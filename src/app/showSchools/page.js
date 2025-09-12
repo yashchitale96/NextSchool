@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function ShowSchools() {
   const [schools, setSchools] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { isAuthenticated, isLoading: authLoading, user } = useAuth();
 
   useEffect(() => {
     fetchSchools();
@@ -77,12 +79,32 @@ export default function ShowSchools() {
               <h1 className="text-3xl font-bold text-gray-900">Schools Directory</h1>
               <p className="text-gray-600 mt-1">Discover and explore schools in your area</p>
             </div>
-            <Link 
-              href="/addSchool"
-              className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-            >
-              Add New School
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              {!authLoading && (
+                <div className="text-sm text-gray-600">
+                  {isAuthenticated ? (
+                    <span className="text-green-600">✓ Logged in as {user?.email}</span>
+                  ) : (
+                    <span className="text-amber-600">🔒 Login required to add schools</span>
+                  )}
+                </div>
+              )}
+              {isAuthenticated ? (
+                <Link 
+                  href="/addSchool"
+                  className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                >
+                  Add New School
+                </Link>
+              ) : (
+                <Link 
+                  href="/login"
+                  className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                >
+                  Login to Add Schools
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -99,10 +121,10 @@ export default function ShowSchools() {
             <h3 className="text-lg font-medium text-gray-900 mb-2">No schools found</h3>
             <p className="text-gray-600 mb-6">Start by adding your first school to the directory.</p>
             <Link 
-              href="/addSchool"
+              href={isAuthenticated ? "/addSchool" : "/login"}
               className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors"
             >
-              Add First School
+              {isAuthenticated ? "Add First School" : "Login to Add Schools"}
             </Link>
           </div>
         ) : (
